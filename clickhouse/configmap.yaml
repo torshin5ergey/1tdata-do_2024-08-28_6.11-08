@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: clickhouse-config
+  namespace: clickhouse
+data:
+  config.xml: |
+    <yandex>
+      <clickhouse>
+        <logger>
+          <level>trace</level>
+          <log>clickhouse.log</log>
+          <errorlog>clickhouse.err.log</errorlog>
+        </logger>
+        <http_port>8123</http_port>
+        <tcp_port>9000</tcp_port>
+        <path>/var/lib/clickhouse/</path>
+        <user>
+          <name>ch_user</name>
+          <password>test123</password>
+        </user>
+      </clickhouse>
+    </yandex>
+  users.xml: |
+    <yandex>
+      <users>
+        <ch_user>
+          <password>test123</password>
+          <profile>default</profile>
+          <quota>default</quota>
+        </ch_user>
+      </users>
+    </yandex>
