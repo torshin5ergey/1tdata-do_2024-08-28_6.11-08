@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: clickhouse
-  namespace: clickhouse
+  namespace: ch
 spec:
   replicas: 1
   selector:
@@ -20,14 +20,14 @@ spec:
             - containerPort: 8123
             - containerPort: 9000
           volumeMounts:
-            - name: clickhouse-config
-              mountPath: /etc/clickhouse-server/config.d
+            - name: clickhouse-users
+              mountPath: /etc/clickhouse-server/users.d
             - name: clickhouse-data
               mountPath: /var/lib/clickhouse
       volumes:
-        - name: clickhouse-config
+        - name: clickhouse-users
           configMap:
-            name: clickhouse-config
+            name: clickhouse-users
         - name: clickhouse-data
           persistentVolumeClaim:
             claimName: clickhouse-pv-claim
